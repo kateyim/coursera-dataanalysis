@@ -58,4 +58,14 @@ s <- strsplit(names(survey), "wgtp")
 s[123]
 
 #Question 9
+quantile(survey$YBL, na.rm=TRUE)
 
+#Question 10
+fileUrl <- "https://dl.dropbox.com/u/7710864/data/csv_hid/ss06pid.csv"
+download.file(fileUrl, destfile="./data/american.csv", method="wget")
+con <- file("./data/american.csv")
+populationData <- read.csv(con)
+close(con)
+housingData <- survey
+mergeData <- merge(housingData, populationData, by.x="SERIALNO", by.y="SERIALNO", all=TRUE)
+dim(mergeData)
